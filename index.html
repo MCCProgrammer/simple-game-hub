@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Game Hub - 2 Player Games</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Local Game Hub</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search games...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="games-grid" id="gamesContainer">
+        </div>
+    </main>
+
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="gameContent"></div>
+        </div>
+    </div>
+
+    <script src="js/games.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

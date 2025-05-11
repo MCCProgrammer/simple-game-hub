@@ -1,0 +1,462 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #2c3e50;
+    --background-color: #f5f6fa;
+    --card-background: #ffffff;
+    --text-color: #2c3e50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#searchButton:hover {
+    background-color: #1a252f;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.game-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.game-card p {
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.game-card .players {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--secondary-color);
+}
+
+.game-card .high-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f1c40f;
+    margin-top: 10px;
+}
+
+.game-card .high-score i {
+    font-size: 1.2rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    background-color: var(--card-background);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+.score, .high-score, .power-ups {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.power-ups {
+    color: #f1c40f;
+}
+
+.game-status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: var(--card-background);
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+#restartGame {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+#restartGame:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.leaderboard {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--background-color);
+    border-radius: 4px;
+}
+
+.leaderboard h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th,
+.leaderboard td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #flappyCanvas, #snakeCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.game-board {
+    display: grid;
+    gap: 5px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Tic Tac Toe specific styles */
+#ticTacToeBoard {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 300px;
+    height: 300px;
+}
+
+#ticTacToeBoard .cell {
+    background-color: var(--card-background);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#ticTacToeBoard .cell:hover {
+    background-color: #f0f0f0;
+}
+
+#ticTacToeBoard .cell.x {
+    color: var(--primary-color);
+}
+
+#ticTacToeBoard .cell.o {
+    color: #e74c3c;
+}
+
+/* Connect Four specific styles */
+#connectFourBoard {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 350px;
+    height: 300px;
+}
+
+#connectFourBoard .cell {
+    background-color: var(--card-background);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#connectFourBoard .cell:hover {
+    background-color: #f0f0f0;
+}
+
+#connectFourBoard .cell.red {
+    background-color: #e74c3c;
+}
+
+#connectFourBoard .cell.yellow {
+    background-color: #f1c40f;
+}
+
+/* Game Page Styles */
+.game-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.game-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+#backToHub {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#backToHub:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+}
+
+.game-content {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Improved Flappy Bird Styles */
+#flappyCanvas {
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Improved Snake Game Styles */
+#snakeCanvas {
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Game Controls Styles */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.control-button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .game-page {
+        padding: 10px;
+    }
+
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    #flappyCanvas, #snakeCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Memory Game specific styles */
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.memory-card.flipped {
+    background-color: white;
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+    background-color: #2ecc71;
+    cursor: default;
+} 
